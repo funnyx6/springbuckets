@@ -1,0 +1,12 @@
+server:
+  port: 10000
+
+# 注册服务到nacos server
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+
+  application:
+    name: user-provider
