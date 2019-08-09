@@ -48,10 +48,7 @@
     </dependencyManagement>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+        <!--        spring-cloud-gateway和spring-boot-starter-web有冲突 -->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

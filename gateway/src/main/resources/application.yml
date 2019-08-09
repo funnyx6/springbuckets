@@ -1,0 +1,23 @@
+server:
+  port: 10005
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        register-enabled: true
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: user-route
+          # 开启负载均衡，这里的service即nacos注册的服务名
+          uri: lb://user-service
+          predicates:
+          - Path=/api/user/**
+
+  application:
+    name: gateway

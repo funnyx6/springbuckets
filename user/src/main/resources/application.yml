@@ -7,6 +7,5 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848
-
   application:
-    name: user-provider
+    name: user-service
