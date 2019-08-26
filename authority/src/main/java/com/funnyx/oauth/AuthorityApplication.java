@@ -1,13 +1,12 @@
-package com.funnyx.user;
+package com.funnyx.oauth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
-public class UserApplication {
+public class AuthorityApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(UserApplication.class, args);
+    SpringApplication.run(AuthorityApplication.class, args);
   }
 }

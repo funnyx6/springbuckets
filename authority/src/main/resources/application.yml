@@ -1,0 +1,9 @@
+server:
+  port: 10006
+spring:
+  application:
+    name: oauth-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848

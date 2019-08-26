@@ -17,7 +17,7 @@ spring:
           # 开启负载均衡，这里的service即nacos注册的服务名
           uri: lb://user-service
           predicates:
-          - Path=/api/user/**
+            - Path=/api/user/**
 
   application:
     name: gateway

@@ -1,0 +1,11 @@
+server:
+  port: 10001
+
+# 该模块主要是为了测试
+spring:
+  application:
+    name: registry-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
