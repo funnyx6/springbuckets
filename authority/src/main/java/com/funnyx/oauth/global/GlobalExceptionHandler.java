@@ -4,10 +4,12 @@ import com.funnyx.oauth.exception.AuthorizationException;
 import com.funnyx.oauth.response.BasicResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 @Slf4j
+@ResponseBody
 public class GlobalExceptionHandler {
 
   @ExceptionHandler(AuthorizationException.class)
