@@ -18,6 +18,10 @@ spring:
           uri: lb://user-service
           predicates:
             - Path=/api/user/**
+        - id: order-route
+          uri: lb://order-service
+          predicates:
+            - Path=/api/order/**
 
   application:
     name: gateway

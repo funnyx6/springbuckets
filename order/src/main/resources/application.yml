@@ -1,13 +1,10 @@
-server:
-  port: 10000
-# 注册服务到nacos server
 spring:
   cloud:
     nacos:
       discovery:
         server-addr: localhost:8848
   application:
-    name: user-service
+    name: order-service
   datasource:
     url: jdbc:mysql://localhost:3306/localDB
     hikari:
@@ -16,3 +13,5 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     show-sql: true
+server:
+  port: 10001
