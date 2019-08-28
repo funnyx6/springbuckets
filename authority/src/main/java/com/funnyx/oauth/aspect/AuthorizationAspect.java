@@ -38,7 +38,7 @@ public class AuthorizationAspect {
       }
       return joinPoint.proceed();
     } catch (Throwable throwable) {
-      throw new AuthorizationException(500, "系统异常");
+      throw new AuthorizationException(500, "token解析错误");
     }
   }
 
