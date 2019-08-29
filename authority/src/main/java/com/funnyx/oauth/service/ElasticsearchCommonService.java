@@ -63,6 +63,8 @@ public class ElasticsearchCommonService {
       return JSON.parseObject(s, cls);
     } catch (RuntimeException ex) {
       throw new ElasticsearchException(5000, "获取文档数据失败");
+    } finally {
+      client.close();
     }
   }
 
@@ -87,6 +89,8 @@ public class ElasticsearchCommonService {
       }
     } catch (RuntimeException ex) {
       throw new ElasticsearchException(5000, "文档索引失败");
+    } finally {
+      client.close();
     }
   }
 
@@ -107,6 +111,8 @@ public class ElasticsearchCommonService {
       return response.getCount();
     } catch (RuntimeException ex) {
       throw new ElasticsearchException(5000, "获取文档数量失败");
+    } finally {
+      client.close();
     }
   }
 
@@ -140,6 +146,8 @@ public class ElasticsearchCommonService {
       return list;
     } catch (RuntimeException ex) {
       throw new ElasticsearchException(5000, "获取文档数据失败");
+    } finally {
+      client.close();
     }
   }
 
