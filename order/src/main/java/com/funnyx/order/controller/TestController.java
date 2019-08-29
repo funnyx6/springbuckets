@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.funnyx.oauth.response.BasicResponse;
 import com.funnyx.oauth.service.ElasticsearchCommonService;
 import com.funnyx.order.entity.TestObject;
+import com.funnyx.order.feignclient.OrderFeignClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,8 @@ import java.util.List;
 public class TestController {
 
   @Autowired private ElasticsearchCommonService elasticsearchCommonService;
+
+  @Autowired private OrderFeignClient orderFeignClient;
 
   @GetMapping(value = "/api/order/test")
   public String test() throws Exception {
@@ -47,5 +50,10 @@ public class TestController {
   public BasicResponse<List<TestObject>> testSearch() throws Exception {
     List<TestObject> list = elasticsearchCommonService.searchAll("index4", TestObject.class);
     return new BasicResponse<>(list);
+  }
+
+  @GetMapping(value = "/api/order/testFeign")
+  public String testFeign() {
+    return orderFeignClient.testFeign();
   }
 }

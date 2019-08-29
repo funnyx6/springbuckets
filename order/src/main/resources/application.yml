@@ -15,3 +15,14 @@ spring:
 #    show-sql: true
 server:
   port: 10001
+
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: FULL
+logging:
+  level:
+    com:
+      funnyx:
+        order: debug
