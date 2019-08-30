@@ -3,6 +3,7 @@ package com.funnyx.order.controller;
 import com.alibaba.fastjson.JSON;
 import com.funnyx.oauth.response.BasicResponse;
 import com.funnyx.oauth.service.ElasticsearchCommonService;
+import com.funnyx.oauth.util.RedissonUtil;
 import com.funnyx.order.entity.TestObject;
 import com.funnyx.order.feignclient.OrderFeignClient;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +20,8 @@ public class TestController {
   @Autowired private ElasticsearchCommonService elasticsearchCommonService;
 
   @Autowired private OrderFeignClient orderFeignClient;
+
+  @Autowired private RedissonUtil redissonUtil;
 
   @GetMapping(value = "/api/order/test")
   public String test() throws Exception {
@@ -55,5 +58,30 @@ public class TestController {
   @GetMapping(value = "/api/order/testFeign")
   public String testFeign() {
     return orderFeignClient.testFeign();
+  }
+
+  @GetMapping(value = "/api/order/testRedissonGet")
+  public String testRedissonGet() {
+    String hello = (String) redissonUtil.get("hello1");
+    return hello;
+  }
+
+  @GetMapping(value = "/api/order/testRedissonSet")
+  public void testRedissonSet() {
+    redissonUtil.set("hello1", "world1");
+  }
+
+  @GetMapping(value = "/api/order/testGetMap")
+  public String testRedissonGetMap() {
+    TestObject hget = (TestObject) redissonUtil.hget("content:map1", 123);
+    return hget.getContent();
+  }
+
+  @GetMapping(value = "/api/order/testSetMap")
+  public void testRedissonSetMap() {
+    TestObject testObject = new TestObject();
+    testObject.setName("一篇有实力的文章");
+    testObject.setContent("Java,Golang,Javascript");
+    redissonUtil.hset("content:map", 123, testObject);
   }
 }
