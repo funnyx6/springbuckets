@@ -15,7 +15,7 @@ spring:
     password: 123456
   jpa:
     show-sql: true
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect # 使用MySQL InnoDB引擎
     hibernate:
       ddl-auto: none  # create 可以在测试环境配置
       naming: # 无修改命名
