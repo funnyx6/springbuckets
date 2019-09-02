@@ -98,4 +98,47 @@ public class JedisUtil {
     }
     return value;
   }
+
+  /**
+   * HyperlogLog 计算基数
+   *
+   * @param key 键
+   */
+  public Long pdcount(String key) {
+    Jedis jedis = null;
+    Long value = null;
+    try {
+      jedis = jedisPool.getResource();
+      value = jedis.pfcount(key);
+    } catch (Exception e) {
+      log.error(e.getMessage());
+    } finally {
+      if (jedis != null) {
+        jedis.close(); // return resource to JedisPool
+      }
+    }
+    return value;
+  }
+
+  /**
+   * HyperlogLog 添加元素
+   *
+   * @param key 键
+   * @param values
+   */
+  public Long pfadd(String key, String[] values) {
+    Jedis jedis = null;
+    Long value = null;
+    try {
+      jedis = jedisPool.getResource();
+      value = jedis.pfadd(key, values);
+    } catch (Exception e) {
+      log.error(e.getMessage());
+    } finally {
+      if (jedis != null) {
+        jedis.close(); // return resource to JedisPool
+      }
+    }
+    return value;
+  }
 }
