@@ -20,6 +20,10 @@ spring:
       ddl-auto: none  # create 可以在测试环境配置
       naming: # 无修改命名
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
 server:
   port: 10001
 

@@ -19,6 +19,7 @@
         <java.version>1.8</java.version>
         <elasticsearch.version>7.1.1</elasticsearch.version>
         <redisson.version>3.11.2</redisson.version>
+        <jedis.version>3.1.0</jedis.version>
     </properties>
 
     <dependencyManagement>
@@ -50,6 +51,14 @@
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson</artifactId>
                 <version>${redisson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
+                <type>jar</type>
+                <scope>compile</scope>
             </dependency>
 
         </dependencies>

@@ -1,4 +1,4 @@
-package com.funnyx.oauth.util;
+package com.funnyx.oauth.config;
 
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;

@@ -3,6 +3,7 @@ package com.funnyx.order.controller;
 import com.alibaba.fastjson.JSON;
 import com.funnyx.oauth.response.BasicResponse;
 import com.funnyx.oauth.service.ElasticsearchCommonService;
+import com.funnyx.oauth.util.JedisUtil;
 import com.funnyx.oauth.util.RedissonUtil;
 import com.funnyx.order.entity.Order;
 import com.funnyx.order.entity.TestObject;
@@ -28,6 +29,8 @@ public class TestController {
   @Autowired private RedissonUtil redissonUtil;
 
   @Autowired private OrderService orderService;
+
+  @Autowired private JedisUtil jedisUtil;
 
   @GetMapping(value = "/api/order/test")
   public String test() throws Exception {
@@ -103,5 +106,10 @@ public class TestController {
     if (order.isPresent()) {
       return new BasicResponse<>(order.get());
     } else return new BasicResponse<>(5000, "对应的ID没有数据");
+  }
+
+  @GetMapping(value = "/api/order/testJedis")
+  public String testJedis() {
+    return jedisUtil.get("test", 0);
   }
 }
