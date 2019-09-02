@@ -109,7 +109,7 @@ public class TestController {
   }
 
   @GetMapping(value = "/api/order/testJedis")
-  public String testJedis() {
-    return jedisUtil.get("test", 0);
+  public Long testJedis() {
+    return jedisUtil.increase("number");
   }
 }
