@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import java.util.Map;
+
 @Component
 @Slf4j
 public class JedisUtil {
@@ -76,6 +78,34 @@ public class JedisUtil {
       }
     }
     return value;
+  }
+
+  public void hset(String key, String field, String value) {
+    Jedis jedis = null;
+    try {
+      jedis = jedisPool.getResource();
+      jedis.hset(key, field, value);
+    } catch (Exception e) {
+      log.error(e.getMessage());
+    } finally {
+      if (jedis != null) {
+        jedis.close(); // return resource to JedisPool
+      }
+    }
+  }
+
+  public void hset(String key, Map<String, String> map) {
+    Jedis jedis = null;
+    try {
+      jedis = jedisPool.getResource();
+      jedis.hset(key, map);
+    } catch (Exception e) {
+      log.error(e.getMessage());
+    } finally {
+      if (jedis != null) {
+        jedis.close(); // return resource to JedisPool
+      }
+    }
   }
 
   /**
@@ -154,6 +184,114 @@ public class JedisUtil {
     try {
       jedis = jedisPool.getResource();
       value = jedis.exists(key);
+    } catch (Exception e) {
+      log.error(e.getMessage());
+    } finally {
+      if (jedis != null) {
+        jedis.close(); // return resource to JedisPool
+      }
+    }
+    return value;
+  }
+
+  /**
+   * 将给定元素放入队列，然后返回队列当前包含的元素数量作为结果。
+   *
+   * @param key
+   * @param item
+   */
+  public long enqueue(String key, String item) {
+    Jedis jedis = null;
+    long value = 0;
+    try {
+      jedis = jedisPool.getResource();
+      value = jedis.lpush(key, item);
+    } catch (Exception e) {
+      log.error(e.getMessage());
+    } finally {
+      if (jedis != null) {
+        jedis.close(); // return resource to JedisPool
+      }
+    }
+    return value;
+  }
+
+  /**
+   * 判断这个元素是否在集合中
+   *
+   * @param key
+   * @param item
+   */
+  public boolean sismember(String key, String item) {
+    Jedis jedis = null;
+    boolean value = false;
+    try {
+      jedis = jedisPool.getResource();
+      value = jedis.sismember(key, item);
+    } catch (Exception e) {
+      log.error(e.getMessage());
+    } finally {
+      if (jedis != null) {
+        jedis.close(); // return resource to JedisPool
+      }
+    }
+    return value;
+  }
+
+  /**
+   * 将指定的元素添加到集合中
+   *
+   * @param key
+   * @param member
+   */
+  public void sadd(String key, String member) {
+    Jedis jedis = null;
+    try {
+      jedis = jedisPool.getResource();
+      jedis.sadd(key, member);
+    } catch (Exception e) {
+      log.error(e.getMessage());
+    } finally {
+      if (jedis != null) {
+        jedis.close(); // return resource to JedisPool
+      }
+    }
+  }
+
+  /**
+   * 1 if the new element was removed 0 if the new element was not a member of the set
+   *
+   * @param key
+   * @param member
+   * @return
+   */
+  public long srem(String key, String member) {
+    Jedis jedis = null;
+    long value = 0L;
+    try {
+      jedis = jedisPool.getResource();
+      value = jedis.srem(key, member);
+    } catch (Exception e) {
+      log.error(e.getMessage());
+    } finally {
+      if (jedis != null) {
+        jedis.close(); // return resource to JedisPool
+      }
+    }
+    return value;
+  }
+
+  /**
+   * 移除并返回队列目前入队时间最长的元素。
+   *
+   * @param key
+   */
+  public String dequeue(String key) {
+    Jedis jedis = null;
+    String value = "";
+    try {
+      jedis = jedisPool.getResource();
+      value = jedis.rpop(key);
     } catch (Exception e) {
       log.error(e.getMessage());
     } finally {

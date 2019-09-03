@@ -10,6 +10,7 @@ import com.funnyx.order.entity.TestObject;
 import com.funnyx.order.feignclient.OrderFeignClient;
 import com.funnyx.order.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -111,5 +112,19 @@ public class TestController {
   @GetMapping(value = "/api/order/testJedis")
   public Long testJedis() {
     return jedisUtil.increase("number");
+  }
+
+  @GetMapping(value = "/api/product/purchase/{id}")
+  public void purchase(@PathVariable String id) {
+
+    String userName = RandomStringUtils.randomAlphanumeric(10);
+    jedisUtil.enqueue("request_queue", userName);
+    if (jedisUtil.sismember("product", id)) {
+      jedisUtil.srem("product", id);
+      String request_queue = jedisUtil.dequeue("request_queue");
+      jedisUtil.hset("purchase_success", id, request_queue);
+    } else {
+      jedisUtil.increase("purchase_fail");
+    }
   }
 }
