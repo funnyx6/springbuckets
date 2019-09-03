@@ -141,4 +141,26 @@ public class JedisUtil {
     }
     return value;
   }
+
+  /**
+   * 是否存在key
+   *
+   * @param key 键
+   * @return true if the key exists, otherwise false
+   */
+  public boolean existsKey(String key) {
+    Jedis jedis = null;
+    boolean value = false;
+    try {
+      jedis = jedisPool.getResource();
+      value = jedis.exists(key);
+    } catch (Exception e) {
+      log.error(e.getMessage());
+    } finally {
+      if (jedis != null) {
+        jedis.close(); // return resource to JedisPool
+      }
+    }
+    return value;
+  }
 }
