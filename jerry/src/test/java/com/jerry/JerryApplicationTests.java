@@ -1,7 +1,10 @@
 package com.jerry;
 
+import com.jerry.proxy.interfaces.Fruit;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.aop.framework.ProxyFactoryBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -9,6 +12,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class JerryApplicationTests {
 
+  @Autowired private ProxyFactoryBean factoryBean;
+
   @Test
-  public void contextLoads() {}
+  public void contextLoads() {
+    Fruit fruit = (Fruit) factoryBean.getObject();
+    fruit.color();
+  }
 }
