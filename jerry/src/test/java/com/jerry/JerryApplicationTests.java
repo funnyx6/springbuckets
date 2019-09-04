@@ -15,7 +15,7 @@ public class JerryApplicationTests {
   @Autowired private ProxyFactoryBean factoryBean;
 
   @Test
-  public void contextLoads() {
+  public void springAOPTest() {
     Fruit fruit = (Fruit) factoryBean.getObject();
     fruit.color();
   }

@@ -11,16 +11,16 @@ import org.springframework.context.annotation.Configuration;
 public class ProxyConfiguration {
 
   @Bean
-  public ProxyFactoryBean factoryBean() throws ClassNotFoundException {
+  public ProxyFactoryBean factoryBean(Fruit fruit) throws ClassNotFoundException {
     ProxyFactoryBean factoryBean = new ProxyFactoryBean();
     factoryBean.setProxyInterfaces(Fruit.class.getInterfaces());
     factoryBean.setInterceptorNames("orangeBeforeAdvice");
-    factoryBean.setTarget(orange());
+    factoryBean.setTarget(fruit);
     return factoryBean;
   }
 
   @Bean
-  public Orange orange() {
+  public Fruit fruit() {
     return new Orange();
   }
 
