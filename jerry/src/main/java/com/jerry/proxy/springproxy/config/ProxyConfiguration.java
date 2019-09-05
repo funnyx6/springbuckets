@@ -2,6 +2,7 @@ package com.jerry.proxy.springproxy.config;
 
 import com.jerry.proxy.interfaces.Fruit;
 import com.jerry.proxy.springproxy.Orange;
+import com.jerry.proxy.springproxy.OrangeAfterAdvice;
 import com.jerry.proxy.springproxy.OrangeBeforeAdvice;
 import org.springframework.aop.framework.ProxyFactoryBean;
 import org.springframework.context.annotation.Bean;
@@ -23,7 +24,7 @@ public class ProxyConfiguration {
   public ProxyFactoryBean factoryBean(Fruit fruit) throws ClassNotFoundException {
     ProxyFactoryBean factoryBean = new ProxyFactoryBean();
     factoryBean.setProxyInterfaces(Fruit.class.getInterfaces());
-    factoryBean.setInterceptorNames("orangeBeforeAdvice");
+    factoryBean.setInterceptorNames(new String[] {"orangeBeforeAdvice", "orangeAfterAdvice"});
     factoryBean.setTarget(fruit);
     return factoryBean;
   }
@@ -33,8 +34,15 @@ public class ProxyConfiguration {
     return new Orange();
   }
 
+  /** 前置增强 */
   @Bean
   public OrangeBeforeAdvice orangeBeforeAdvice() {
     return new OrangeBeforeAdvice();
+  }
+
+  /** 后置增强 */
+  @Bean
+  public OrangeAfterAdvice orangeAfterAdvice() {
+    return new OrangeAfterAdvice();
   }
 }
