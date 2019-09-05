@@ -7,6 +7,8 @@ import java.lang.reflect.Proxy;
 public class MainMethod {
 
   public static void main(String[] args) {
+    // 可以生成proxy的class文件
+    System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
     //
     Fruit fruit = new Apple();
     ProxyHandler proxyHandler = new ProxyHandler(fruit);
