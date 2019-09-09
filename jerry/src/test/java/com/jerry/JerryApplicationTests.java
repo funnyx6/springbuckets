@@ -1,12 +1,15 @@
 package com.jerry;
 
 import com.jerry.proxy.interfaces.Fruit;
+import com.jerry.proxy.springproxy.config.ProxyConfiguration;
 import com.jerry.springtransaction.jdbctemplate.Order;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.aop.framework.ProxyFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -45,5 +48,12 @@ public class JerryApplicationTests {
       order.setOrderNum(rs.getString("orderNum"));
       return order;
     }
+  }
+
+  @Test
+  public void applicationContext() {
+    ApplicationContext context = new AnnotationConfigApplicationContext(ProxyConfiguration.class);
+    Fruit fruit = (Fruit) context.getBean("fruit");
+    fruit.color();
   }
 }

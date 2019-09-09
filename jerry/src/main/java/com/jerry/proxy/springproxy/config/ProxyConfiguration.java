@@ -29,7 +29,7 @@ public class ProxyConfiguration {
     return factoryBean;
   }
 
-  @Bean
+  @Bean(name = "fruit")
   public Fruit fruit() {
     return new Orange();
   }
