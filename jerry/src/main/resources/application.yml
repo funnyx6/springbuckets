@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/localdb
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect # 使用MySQL InnoDB引擎
+    hibernate:
+      ddl-auto: none  # create 可以在测试环境配置
+      naming: # 无修改命名
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
