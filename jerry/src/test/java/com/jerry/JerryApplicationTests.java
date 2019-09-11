@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -55,5 +56,13 @@ public class JerryApplicationTests {
     ApplicationContext context = new AnnotationConfigApplicationContext(ProxyConfiguration.class);
     Fruit fruit = (Fruit) context.getBean("fruit");
     fruit.color();
+  }
+
+  @Test
+  public void applicationContextFromXML() {
+    ApplicationContext context =
+        new ClassPathXmlApplicationContext("classpath:application-bean.xml");
+    Order order = (Order) context.getBean("order");
+    System.out.println(order);
   }
 }
