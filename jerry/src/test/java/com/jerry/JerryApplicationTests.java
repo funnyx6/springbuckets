@@ -6,7 +6,10 @@ import com.jerry.springtransaction.jdbctemplate.Order;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.aop.framework.ProxyFactoryBean;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -64,5 +67,13 @@ public class JerryApplicationTests {
         new ClassPathXmlApplicationContext("classpath:application-bean.xml");
     Order order = (Order) context.getBean("order");
     System.out.println(order);
+
+    BeanFactory factory = new DefaultListableBeanFactory();
+    XmlBeanDefinitionReader reader =
+        new XmlBeanDefinitionReader((DefaultListableBeanFactory) factory);
+    int i = reader.loadBeanDefinitions("classpath:application-bean.xml");
+    System.out.println(i);
+    Order order1 = (Order) factory.getBean("order");
+    System.out.println(order1);
   }
 }
