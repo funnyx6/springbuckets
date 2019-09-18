@@ -1,0 +1,10 @@
+### The Servlet Interface
+--- 
+Servlet接口是Java Servlet
+API的核心抽象,所有的servlets或者直接的实现这个接口，更常见的是，通过继承一个类来实现这个接口，在Java
+Servlet
+API里有两个类实现了这个接口，这两个类是GenericServlet和HttpServlet，大多数情况下，开发者只需要继承HttpServlet就可以了。
+
+---
+### Request Handling Methods
+基础的Servlet接口定义了一个service方法来处理客户端的请求，
