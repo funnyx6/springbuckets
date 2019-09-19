@@ -35,3 +35,57 @@ doGet方法产生的headers。doOptions方法响应HTTP方法所在的位置
 ### 2.1.3 Conditional GET Support
 HttpServlet接口定义了一个getLastModified方法来支持有条件的GET操作，一个有条件的GET请求操作
 只有在从指定的时间开始修改时才会这样做，在合适的情况下，这个方法的实现可能有助于网络资源的利用。
+
+
+## 4.1 Introduction to the ServletContext Interface
+ServletContext(Servlet上下文)接口定义了一个Servlet的视图当Servlet的内部Web应用在运行的时候，容器提供者负责在Servlet容器中提供对ServletContext接口的实现
+使用ServletContext对象，一个servlet能够记录事件，获得对资源URL的引用，存储上下文中其他servlet访问的属性。
+
+## 4.2 Scope of a ServletContext Interface
+
+在Web应用部署到容器当中的时候有一个ServletContext接口与其相关联。容器被分布式部署在很多的虚拟机上，在这种情况下，Web应用将会在每一个JVM上都有一个ServletContext
+的实例。
+容器中的servlet没有作为Web应用程序的一部分部署隐式地作为“默认”Web应用程序的一部分，并具有默认的ServletContext。在一个分布式容器中，默认的ServletContext是非分布式的，并且必须是分布式的
+只存在于一个JVM中。
+
+## 4.3 Initialization Parameters
+
+ServletContext接口提供了方法允许servlet访问上下文来初始化被应用开发者所定义的和Web应用相关联的一些参数。
+
+- getInitParameter
+- getInitParameterNames
+
+参数初始化被应用开发者使用来传递一些配置信息，典型的例子就是网站管理员的e-mail地址，或者保存关键数据的系统。
+
+
+## 4.4 Configuration methods
+
+从Servlet
+3.0开始，这些方法被添加到ServletContext中，以便能够使用编程的方式来定义servlet，filter，和url
+pattern。这些方法仅能够在应用初始化期间被调用。要么是通过ServletContextListener的实现的contextInitialized方法，或者是
+通过ServletContainerInitializer的实现的onStartup方法。除了添加Servlets和Filters，还可以查找出相应的一个Servlet或者Filter的注册对象的实例，
+或者所有的Servlets和Filters的注册对象的映射。如果ServletContext通过ServletContextListener的contextInitialized方法既没有发现
+申明web.xml、web-*.xml文件也没有 
+**@WebListener**的注解，那么对于所有用编程式配置的servlets,filters,listeners的方法都会抛出一个
+UnsupportedOperationException的异常。
+
+### 4.4.1 Programmatically adding and configuring Servlets
+
+
+
+> 这里仅列出ServletContext的部分API，不作翻译
+
+
+#### 4.4.1.1 addServlet(String servletName, String className)
+
+#### 4.4.1.2 addServlet(String servletName, Servlet servlet)
+
+#### 4.4.1.3 addServlet(String servletName, Class <? extends Servlet> servletClass)
+
+#### 4.4.1.4 < T extends Servlet> T createServlet(Class < T > clazz)
+
+#### 4.4.1.5 ServletRegistration getServletRegistration(String servletName)
+
+#### 4.4.1.6 Map<String, <? extends ServletRegistration> getServletRegistrations()
+
+
