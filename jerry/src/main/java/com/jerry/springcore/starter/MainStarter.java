@@ -25,6 +25,7 @@ public class MainStarter {
 
     // 从IOC容器获取Bean
     Foo foo = context.getBean("foo", Foo.class);
+    //    Eoo eoo = context.getBean("eoo", Eoo.class);
     System.out.println(foo.toString());
   }
 }

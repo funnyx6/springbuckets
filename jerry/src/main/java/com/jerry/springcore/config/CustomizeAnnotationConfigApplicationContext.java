@@ -10,6 +10,8 @@ public class CustomizeAnnotationConfigApplicationContext extends ClassPathXmlApp
     super(s);
   }
 
+  //
+
   @Override
   protected void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) {
     BeanDefinition mainConfig = beanFactory.getBeanDefinition("order");
